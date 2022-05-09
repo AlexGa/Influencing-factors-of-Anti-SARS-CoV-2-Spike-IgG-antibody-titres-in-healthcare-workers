@@ -3,17 +3,26 @@ title: 'Statistical Analysis: Influencing factors of Anti-SARS-CoV-2-Spike-IgG a
   titres in healthcare workers – A cross-section study'
 author: "Alexander Gabel"
 date: "05-05-2022"
+# output:
+  # html_document:
+  #   df_print: paged
+  #   code_folding: hide
+  #   toc: yes
+  #   toc_depth: 2
+  #   toc_float:
+  #     collapsed: no
+  # pdf_document:
+  #   toc: yes
+  #   toc_depth: '2'
+# always_allow_html: true
 output:
-  html_document:
+  github_document:
     df_print: paged
-    code_folding: hide
-    toc: yes
+    # code_folding: hide
+    toc: true
     toc_depth: 2
-    toc_float:
-      collapsed: no
-  pdf_document:
-    toc: yes
-    toc_depth: '2'
+    # toc_float:
+    #   collapsed: FALSE
 ---
 
 # External Packages and folder structure 
@@ -142,8 +151,8 @@ df_age <- df_ana %>% select(id, Age, gender) %>%
          gender = factor(gender, levels = c("female", "male"))) %>% arrange(AgeBreaks, gender)
 
 ks_pvals <- df_age %>% group_by(gender) %>% summarise(pval= ks.test(x = abs(ukwFreq), y = abs(germanyFreq))$p.value) %>%
-            mutate(pvalue = dplyr::case_when(pval < 1e-4 ~ "< 10^-4",
-                                             pval > 1e-4 &  pval < 1e-3  ~"< 10^-3",
+            mutate(pvalue = dplyr::case_when(pval < 1e-4 ~ "< 0.0001",
+                                             pval > 1e-4 &  pval < 1e-3  ~"< 0.001",
                                              pval > 1e-3 &  pval < 1e-2  ~ "< 0.01",
                                              pval > 1e-2 &  pval < 0.05  ~ "< 0.05",
                                              TRUE ~ "> 0.05"

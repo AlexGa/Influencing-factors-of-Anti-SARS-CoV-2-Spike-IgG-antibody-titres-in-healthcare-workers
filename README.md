@@ -53,10 +53,6 @@ Reproducible Script
 -   [Multiple regression model](#multiple-regression-model)
     -   [Check assumptions for multiple regression
         analysis](#check-assumptions-for-multiple-regression-analysis)
-        -   [Test for Autocorrelation
-            (Durbin-Watson)](#test-for-autocorrelation-durbin-watson)
-        -   [Normality of residuals](#normality-of-residuals)
-        -   [Variance of residuals](#variance-of-residuals)
     -   [Coefficients of the shrunken
         model](#coefficients-of-the-shrunken-model)
     -   [Posthoc tests: Pairwise comparisons within discrete
@@ -167,7 +163,7 @@ dev.off()
 plot_density()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 # Population analysis - CovacSer vs respective German population
 
@@ -202,8 +198,8 @@ df_age <- df_ana %>% select(id, Age, gender) %>%
          gender = factor(gender, levels = c("female", "male"))) %>% arrange(AgeBreaks, gender)
 
 ks_pvals <- df_age %>% group_by(gender) %>% summarise(pval= ks.test(x = abs(ukwFreq), y = abs(germanyFreq))$p.value) %>%
-            mutate(pvalue = dplyr::case_when(pval < 1e-4 ~ "< 10^-4",
-                                             pval > 1e-4 &  pval < 1e-3  ~"< 10^-3",
+            mutate(pvalue = dplyr::case_when(pval < 1e-4 ~ "< 0.0001",
+                                             pval > 1e-4 &  pval < 1e-3  ~"< 0.001",
                                              pval > 1e-3 &  pval < 1e-2  ~ "< 0.01",
                                              pval > 1e-2 &  pval < 0.05  ~ "< 0.05",
                                              TRUE ~ "> 0.05"
@@ -265,7 +261,7 @@ ggplot2::ggsave(plot = comb_pop_plt, filename = file.path(plot.dir, "png", "comb
 comb_pop_plt
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ## Profession & Gender
 
@@ -292,7 +288,7 @@ df_ana %>% group_by(gender, profession) %>% count()  %>% group_by(gender) %>%
   ggplot2::geom_vline(xintercept = 0)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 ``` r
 ggplot2::ggsave(plot = last_plot(), filename = file.path(plot.dir, "png", "Histogram_profession.png"), device = "png",  width = 7, height = 5, dpi = 300)
@@ -315,7 +311,7 @@ df_ana %>% ggplot2::ggplot(ggplot2::aes(x = bmi, fill = factor(gender))) +
   ggsci::scale_fill_d3()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 ``` r
 ggplot2::ggsave(plot = last_plot(), filename = file.path(plot.dir, "png", "Histogram_BMI_distribution.png"), device = "png",  width = 6, height = 5, dpi = 300)
@@ -359,7 +355,7 @@ df_ana %>%
   ggplot2::geom_hline(yintercept = 13, lty = 2)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ``` r
 ggplot2::ggsave(plot = last_plot(), filename = file.path(plot.dir, "png", "boxplot_vacc_vs_days_with_outlier.png"), device = "png", , dpi = 300)
@@ -390,7 +386,7 @@ df_ana %>%
   ggplot2::geom_hline(yintercept = 13, lty = 2)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ``` r
 ggplot2::ggsave(plot = last_plot(), filename = file.path(plot.dir, "png", "boxplot_vacc_vs_days_without_outlier.png"), device = "png",  width = 8, height = 6, dpi = 300)
@@ -421,7 +417,7 @@ df_ana %>%
   ggplot2::guides(col = ggplot2::guide_legend(nrow = 1))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ``` r
 ggplot2::ggsave(plot = last_plot(), filename = file.path(plot.dir, "png", "IgG_vacc_vs_days_with_outlier.png"), device = "png",  width = 8, height = 6, dpi = 300)
@@ -452,7 +448,7 @@ df_ana %>%
                                               override.aes = list(shape = 22, size = 6, stroke = 1, fill = NA)))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ``` r
 ggplot2::ggsave(plot = last_plot(), filename = file.path(plot.dir, "png", "IgG_vacc_vs_days_without_outlier.png"), device = "png",  width = 8, height = 6, dpi = 300)
@@ -507,7 +503,7 @@ lasso_cv <- glmnet::cv.glmnet(X_lasso, y_lasso, alpha = 1, lambda = lambdas2try,
 plot(lasso_cv)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
 ``` r
 png(filename = file.path(plot.dir, paste0("png/Lasso_cross_validation_IgG.png")), units="px", width=1600, height=1600, res=300)
@@ -560,7 +556,7 @@ matplot(log(model_all_lambdas$lambda), t(as.matrix(model_all_lambdas$beta)), typ
 legend("topright", lty = rep(c(1,2), each = 9), col = rep(RColorBrewer::brewer.pal(9,"Set1"), 2) , lwd = 1.5, legend = colnames(X_lasso), cex = .7)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
 
 ``` r
 png(filename = file.path(plot.dir, paste0("png/Lasso_cross_validation_selection_lambda_IgG.png")),units="px", width=2200, height=2000, res=300)
@@ -698,7 +694,7 @@ hist(dw_sampled, breaks = 50, freq = T, main = "Histogram sampled DW statistics"
 abline(v = dw_stat, lwd = 3, col = "red")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
 
 **Durbin-Watson-Test for autocorrelation (no autocorrelation):**
 
@@ -715,7 +711,7 @@ hist(model_residuals, xlab = "Residuals", prob = T, col = "white", main = expres
 lines(x = x_vals, y = dnorm(x = x_vals, mean = mean(model_residuals), sd = sd(model_residuals)), lty = 1, lwd = 2)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
 
 ``` r
 png(filename = file.path(plot.dir, "png/histogram_residuals.png"), units="px", width=1600, height=1600, res=300)
@@ -740,7 +736,7 @@ data.frame(fit = mu, residuals = model_residuals) %>%
                  legend.position = "bottom")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
 
 ``` r
 ggplot2::ggsave(plot = last_plot(), filename = file.path(plot.dir, "png", "Generalized_linear_model_full_model_variance.png"), device = "png",  width = 10, height = 8, dpi = 300)
@@ -912,7 +908,7 @@ post_hoc_comp %>% ggplot2::ggplot() +
   ggplot2::ylab("Comparison")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-29-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-29-1.png)<!-- -->
 
 ``` r
 ggplot2::ggsave(plot = last_plot(), filename = file.path(plot.dir, "png", "Generalized_linear_model_full_model_all_comparisons.png"), device = "png",  width = 10, height = 12, dpi = 300)
@@ -935,7 +931,7 @@ post_hoc_comp %>% filter(p.adj < 0.05) %>% ggplot2::ggplot() +
   ggplot2::ylab("Comparison")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
 
 ``` r
 ggplot2::ggsave(plot = last_plot(), filename = file.path(plot.dir, "png", "Generalized_linear_model_full_model_significant_comparisons.png"), device = "png",  width = 8, height = 5, dpi = 300)
@@ -996,7 +992,7 @@ bx_plt <- df_ana %>% ggplot2::ggplot(ggplot2::aes(x = vacc, y = IgG)) +
 bx_plt
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
 
 ``` r
 ggplot2::ggsave(plot = bx_plt, filename = file.path(plot.dir, "png", "Boxplot_full_model_GLS_comparisons_vaccinations.png"), device = "png", width = 8, height = 6, dpi = 300)
@@ -1209,7 +1205,7 @@ comb_plt_line <- cowplot::plot_grid(line_plt_time, line_plt_bmi, ncol = 2, nrow 
 cowplot::plot_grid(comb_plt, comb_plt_line, nrow = 2, ncol = 1)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
 
 ``` r
 ggplot2::ggsave(plot = last_plot(), filename = file.path(plot.dir, "png/Combined_plots_analysis_full_model.png"), 
@@ -1270,4 +1266,4 @@ ggplot2::ggsave(plot = comb_plt_acc, filename = file.path(plot.dir, "png", "Boxp
 comb_plt_acc
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
+![](Statistical_Analysis_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
