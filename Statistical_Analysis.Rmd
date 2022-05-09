@@ -3,26 +3,17 @@ title: 'Statistical Analysis: Influencing factors of Anti-SARS-CoV-2-Spike-IgG a
   titres in healthcare workers – A cross-section study'
 author: "Alexander Gabel"
 date: "05-05-2022"
-# output:
-  # html_document:
-  #   df_print: paged
-  #   code_folding: hide
-  #   toc: yes
-  #   toc_depth: 2
-  #   toc_float:
-  #     collapsed: no
-  # pdf_document:
-  #   toc: yes
-  #   toc_depth: '2'
-# always_allow_html: true
 output:
-  github_document:
-    df_print: paged
-    # code_folding: hide
-    toc: true
-    toc_depth: 2
-    # toc_float:
-    #   collapsed: FALSE
+html_document:
+  df_print: paged
+  code_folding: hide
+  toc: yes
+  toc_depth: 2
+  toc_float:
+    collapsed: no
+pdf_document:
+  toc: yes
+  toc_depth: '2'
 ---
 
 # External Packages and folder structure 
