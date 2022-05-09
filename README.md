@@ -2,18 +2,13 @@
 
 Julia Reusch<sup>1,2</sup>; Isabell Wagenhäuser<sup>1,2</sup>; Alexander Gabel<sup>1</sup>; Annika Eggestein<sup>1</sup>; Anna Wagner<sup>1</sup>; Thiên-Trí Lâm<sup>3</sup>; Anna Frey<sup>2</sup>; Alexandra Schubert-Unkmeir<sup>3</sup>; Lars Dölken<sup>4</sup>; Stefan Frantz<sup>2</sup>; Oliver Kurzai<sup>3,5</sup>; Ulrich Vogel<sup>1,3</sup>; Manuel Krone<sup>1,3\*</sup>; Nils Petri<sup>2\*</sup>
 
-**Affiliations:**
-
-<sup>1</sup> Infection Control Unit, University Hospital Wuerzburg, Wuerzburg, Germany
-<sup>2</sup> Department of Internal Medicine I, University Hospital Wuerzburg, Wuerzburg, Germany
-<sup>3</sup> Institute for Hygiene and Microbiology, University of Wuerzburg, Wuerzburg, Germany
-<sup>4</sup> Institute for Virology and Immunobiology, University of Wuerzburg, Wuerzburg, Germany
-<sup>5</sup> Leibniz Institute for Natural Product Research and Infection Biology – Hans-Knoell-Institute, Jena, Germany 
-
+**Affiliations:** <br /> 
+<sup>1</sup> Infection Control Unit, University Hospital Wuerzburg, Wuerzburg, Germany<br />
+<sup>2</sup> Department of Internal Medicine I, University Hospital Wuerzburg, Wuerzburg, Germany<br />
+<sup>3</sup> Institute for Hygiene and Microbiology, University of Wuerzburg, Wuerzburg, Germany<br />
+<sup>4</sup> Institute for Virology and Immunobiology, University of Wuerzburg, Wuerzburg, Germany<br />
+<sup>5</sup> Leibniz Institute for Natural Product Research and Infection Biology – Hans-Knoell-Institute, Jena, Germany <br />
 <sup>\*</sup> both authors contributed equally
-
-Corresponding author: Nils Petri, Department of Internal Medicine I, University Hospital Wuerzburg, Oberdürrbacher Straße 6, 97080 Wuerzburg, Germany, +49-931-201-44987
-Corresponding author email: petri_n@ukw.de
 
 
 Reproducible Script
